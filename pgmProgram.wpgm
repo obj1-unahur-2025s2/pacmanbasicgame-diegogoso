@@ -2,16 +2,23 @@ import wollok.game.*
 import example.*
 
 program pacmanGame {
-	
+	game.title("Pacman!")
 	// límites del juego
-	game.width(14)
-	game.height(8)
+	game.width(20)
+	game.height(10)
+	game.cellSize(50)
 	
 	// fondo
-	game.boardGround("pacmanBackground.jpg")
+	// game.boardGround("pacmanBackground.jpg")
 	
 	// personaje principal
-	game.addVisualCharacter(pacman)
+	game.addVisual(pacman)
+	game.addVisual(new Rival(numero = 1))
+	keyboard.w().onPressDo({pacman.position(pacman.position().up(1))})
+	keyboard.s().onPressDo({pacman.position(pacman.position().down(1))})
+	keyboard.a().onPressDo({pacman.position(pacman.position().left(1))})
+	keyboard.d().onPressDo({pacman.position(pacman.position().right(1))})
+	keyboard.space().onPressDo({pacman.cambiarSkin("Minecraft.jpg")})
 	
 	// que arranque el juego!
 	game.start()
